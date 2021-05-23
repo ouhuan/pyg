@@ -9,13 +9,14 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+use think\Route;
 
-];
+Route::domain('adminapi', function() {
+    Route::get('/', 'adminapi/index/index');
+    //验证码图片
+    Route::get('captcha/:id', "\\think\\captcha\\CaptchaController@index");//访问图片需要
+    Route::get('/captcha', 'adminapi/login/captcha');
+    // 登录
+    Route::post('/login', 'adminapi/login/login');
+    Route::get('/logout', 'adminapi/login/logout');
+});

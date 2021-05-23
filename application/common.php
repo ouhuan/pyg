@@ -10,3 +10,9 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+if (!function_exists('encrypt_password')) {
+  function encrypt_password ($password) {
+    $salt = 'pyg_by_ouhuan';
+    return md5(md5($password) . $salt);
+  }
+}
